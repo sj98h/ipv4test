@@ -1,11 +1,13 @@
 @import url(https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&display=swap);
 
 * {
-  .gowun-dodum-regular {
-    font-family: "Gowun Dodum", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-  }
+  font-family: "Jua", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  background-color: rgb(0, 0, 0);
 }
 
 header {
@@ -16,11 +18,22 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #01e7dc;
+  color: white;
+  -webkit-text-stroke: 2px black; 
+  
+  border: 1px solid #000;
+  
+  background-image: url(https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+  background-position: center;
+  background-size: cover;
 }
 
 .introduce {
+  color: white;
   margin-top: 100px;
   min-height: 500px;
-  border: 1px solid #000;
+  border: 1px solid white;
+  padding:50px;
+  text-align: center;
+  font-size: 30px;
 }
