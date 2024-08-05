@@ -30,10 +30,42 @@ header {
 
 .introduce {
   color: white;
-  margin-top: 100px;
+  margin-top: 0px;
   min-height: 500px;
   border: 1px solid white;
   padding:50px;
   text-align: center;
   font-size: 30px;
 }
+
+.menu{
+  position: sticky;
+  top: 20%;
+  background-color: transparent;
+  border-radius: 5px ; 
+  gap: 5px;
+}
+.menu button{
+  display: block;
+  height: 70px;
+}
+.btndiv{
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px;
+  margin: 20px 0;
+  
+}
+.btndiv .btn.btn-outline-light{
+  margin-right: 10px;
+  height: 70px;
+  width: 30%;
+  font-size: 30px;
+}
+ 
+  
+
+
+
