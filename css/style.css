@@ -1,3 +1,13 @@
+@import url(https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&display=swap);
+
+* {
+  .gowun-dodum-regular {
+    font-family: "Gowun Dodum", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+}
+
 header {
   max-width: 1920px;
   width: 100%;
