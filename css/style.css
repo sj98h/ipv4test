@@ -20,7 +20,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   color: white;
   -webkit-text-stroke: 2px black;
 
@@ -64,7 +64,6 @@ header {
 
   padding: 0px;
   margin: 20px 0;
-
 }
 
 .btndiv .btn.btn-outline-light {
