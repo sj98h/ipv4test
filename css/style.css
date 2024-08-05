@@ -13,16 +13,19 @@ body {
 header {
   max-width: 1920px;
   width: 100%;
+
   font-size: 100px;
   text-align: center;
+
   display: flex;
   align-items: center;
   justify-content: center;
+  
   color: white;
-  -webkit-text-stroke: 2px black; 
-  
+  -webkit-text-stroke: 2px black;
+
   border: 1px solid #000;
-  
+
   background-image: url(https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
   background-position: center;
   background-size: cover;
@@ -33,39 +36,40 @@ header {
   margin-top: 0px;
   min-height: 500px;
   border: 1px solid white;
-  padding:50px;
+  padding: 50px;
+
   text-align: center;
   font-size: 30px;
 }
 
-.menu{
+.menu {
   position: sticky;
   top: 20%;
   background-color: transparent;
-  border-radius: 5px ; 
+  border-radius: 5px;
   gap: 5px;
 }
-.menu button{
+
+.menu button {
   display: block;
   height: 70px;
 }
-.btndiv{
+
+.btndiv {
   text-align: center;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   padding: 0px;
   margin: 20px 0;
-  
+
 }
-.btndiv .btn.btn-outline-light{
-  margin-right: 10px;
+
+.btndiv .btn.btn-outline-light {
   height: 70px;
   width: 30%;
+  margin-right: 10px;
   font-size: 30px;
 }
- 
-  
-
-
-
