@@ -1,0 +1,16 @@
+header {
+  max-width: 1920px;
+  width: 100%;
+  font-size: 100px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #01e7dc;
+}
+
+.introduce {
+  margin-top: 100px;
+  min-height: 500px;
+  border: 1px solid #000;
+}
