@@ -35,16 +35,6 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  $("#test").click(async function () {
-    let text = $("#input").val();
-    let doc = {
-      text: text,
-    };
-    await addDoc(collection(db, "test"), doc);
-    alert("테스트");
-    window.location.reload();
-  });
-
   // $("#savebtn").click(async function () {
   //   $("#여기들어갈건 멤버카드").toggle();
   // });
@@ -61,23 +51,45 @@
     $('.modalWindow').hide()
   })
 
-//등록 버튼
-//    const submitBtn = document.querySelector("#qwebtn");
-//     submitBtn.addEventListener("click", () => {
-//       alert('완료');
-//     });
-$('#qwebtn').click(async function () {
-    let text = $('#input').val();
+  //등록 버튼
+  //    const submitBtn = document.querySelector("#qwebtn");
+  //     submitBtn.addEventListener("click", () => {
+  //       alert('완료');
+  //     });
+  $('#qwebtn').click(async function () {
+    let pfimg = $('#pfimg').val();
+    let pfname = $('#pfname').val();
+    let pfhobby = $('#pfhobby').val();
+    let pfint = $('#pfint').val();
+    let pfgoals = $('#pfgoals').val();
+    let pfdtr = $('#pfdtr').val();
     let doc = {
-      text: text
+      pfimg: pfimg,
+      pfname: pfname,
+      pfhobby: pfhobby,
+      pfint: pfint,
+      pfgoals: pfgoals,
+      pfdtr:pfdtr
     }
-    
+
+    let temp_html = `<div class="row row-cols-1 row-cols-md-4 g-4 cards">
+    <div class="col">
+      <div class="card h-100">
+        <img class="img_cards" src="" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">${'#pfname'}</h5>
+        </div>
+      </div>
+    </div>
+  </div>`
+
     await addDoc(collection(db, 'inputdata'), doc);
     alert('테스트');
     window.location.reload();
   })
 
- </script>
+
+</script>
 
 <style>
   @import url(../css/style.css);
@@ -89,38 +101,38 @@ $('#qwebtn').click(async function () {
     <p class="closeModal">X</p>
 
     <div class="input-group imgfile">
-      <input accept="img/*" type="file" class="form-control" id="inputGroupFile02">
-      <label class="input-group-text" for="inputGroupFile02">Upload</label>
+      <input accept="img/*" type="file" class="form-control" id="pfimg">
+      <label class="input-group-text" for="pfimg">Upload</label>
     </div>
 
-    <div class = "nametxt">
-      <input placeholder="이름을 입력해주세요." type="text">
+    <div class="nametxt">
+      <input placeholder="이름을 입력해주세요." type="text" id="pfname">
       <input placeholder="MBTI를 입력하세요." type="text">
     </div>
 
-    <div class = "hobbytxt">
-      <input placeholder="취미" type="text">
+    <div class="hobbytxt">
+      <input placeholder="취미" type="text" id="pfhobby">
       <input placeholder="blog 주소 입력" type="text">
     </div>
 
     <div class="input-group itr">
       <span class="input-group-text">관심사</span>
-      <textarea class="form-control" aria-label="With textarea"></textarea>
+      <textarea class="form-control" aria-label="With textarea" id="pfint"></textarea>
     </div>
 
     <div class="input-group goals">
       <span class="input-group-text">목표</span>
-      <textarea class="form-control" aria-label="With textarea"></textarea>
+      <textarea class="form-control" aria-label="With textarea" id="pfgoals"></textarea>
     </div>
 
     <div class="input-group dtn">
       <span class="input-group-text">각오</span>
-      <textarea class="form-control" aria-label="With textarea"></textarea>
+      <textarea class="form-control" aria-label="With textarea" id="pfdtr"></textarea>
     </div>
 
-    <div class = "btnbtn">
-      <button class = "qwe" id = "qwebtn">등록하기</button>
-      <button class = "qwe">닫기</button>
+    <div class="btnbtn">
+      <button class="qwe" id="qwebtn">등록하기</button>
+      <button class="qwe">닫기</button>
     </div>
 
 
