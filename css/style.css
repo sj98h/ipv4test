@@ -88,3 +88,7 @@ header {
 .img_cards {
   height: 500px;
 }
+
+.savebutton>button {
+  margin-left: 80%;
+}
