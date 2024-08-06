@@ -104,6 +104,7 @@ header {
   overflow: scroll;
   background-color: #fff;
   border: 1px solid #000;
+  z-index: 1;
 
   padding: 30px;
 

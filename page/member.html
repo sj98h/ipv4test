@@ -72,32 +72,54 @@
       pfdtr: pfdtr
     }
 
-    
+
 
     await addDoc(collection(db, 'inputdata'), doc);
     alert('테스트');
     // window.location.reload();
   })
 
-  let docs = await getDocs(collection(db, "inputdata"));
-  docs.forEach((doc) => {
-    let row = doc.data();
-    let imgid = row['imgid'];
-    let nameid = row['nameid'];
-    let temp_html = `
+
+  async function displayCards() {
+    const querySnapshot = await getDocs(collection(db, 'inputdata'));
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      let temp_html = `
     <div class="col">
       <div class="card h-100">
-        <img class="img_cards" src="${imgid}" class="card-img-top" alt="..." />
+        <img class="img_cards" src="${data.pfimg}" class="card-img-top" alt="..." />
         <div class="card-body">
-          <h5 class="card-title">${nameid}</h5>
+          <h5 class="card-title">${data.pfname}</h5>
         </div>
       </div>
-    </div>
-  </div>`
-  console.log(temp_html)
-  $('#cards').append(temp_html);
+    </div>`;
+      $('.cards').append(temp_html);
+    });
   }
-    )
+
+  $(document).ready(function () {
+    displayCards();
+  });
+
+  // let docs = await getDocs(collection(db, "inputdata"));
+  // docs.forEach((doc) => {
+  //   let row = doc.data();
+  //   let imgid = row['imgid'];
+  //   let nameid = row['nameid'];
+  //   let temp_html = `
+  //   <div class="col">
+  //     <div class="card h-100">
+  //       <img class="img_cards" src="${imgid}" class="card-img-top" alt="..." />
+  //       <div class="card-body">
+  //         <h5 class="card-title">${nameid}</h5>
+  //       </div>
+  //     </div>
+  //   </div>
+  // </div>`
+  // console.log(temp_html)
+  // $('#cards').append(temp_html);
+  // }
+  //   )
 </script>
 
 <style>
@@ -141,7 +163,6 @@
 
     <div class="btnbtn">
       <button class="qwe" id="qwebtn">등록하기</button>
-      <button class="qwe">닫기</button>
     </div>
 
 
