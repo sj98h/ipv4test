@@ -69,26 +69,35 @@
       pfhobby: pfhobby,
       pfint: pfint,
       pfgoals: pfgoals,
-      pfdtr:pfdtr
+      pfdtr: pfdtr
     }
 
-    let temp_html = `<div class="row row-cols-1 row-cols-md-4 g-4 cards">
+    
+
+    await addDoc(collection(db, 'inputdata'), doc);
+    alert('테스트');
+    // window.location.reload();
+  })
+
+  let docs = await getDocs(collection(db, "inputdata"));
+  docs.forEach((doc) => {
+    let row = doc.data();
+    let imgid = row['imgid'];
+    let nameid = row['nameid'];
+    let temp_html = `
     <div class="col">
       <div class="card h-100">
-        <img class="img_cards" src="" class="card-img-top" alt="..." />
+        <img class="img_cards" src="${imgid}" class="card-img-top" alt="..." />
         <div class="card-body">
-          <h5 class="card-title">${'#pfname'}</h5>
+          <h5 class="card-title">${nameid}</h5>
         </div>
       </div>
     </div>
   </div>`
-
-    await addDoc(collection(db, 'inputdata'), doc);
-    alert('테스트');
-    window.location.reload();
-  })
-
-
+  console.log(temp_html)
+  $('#cards').append(temp_html);
+  }
+    )
 </script>
 
 <style>
@@ -148,12 +157,12 @@
     <button type="button" class="btn btn-outline-light">MEMBERS</button>
     <button type="button" class="btn btn-outline-light">NEWS</button>
   </div>
-  <div class="row row-cols-1 row-cols-md-4 g-4 cards">
+  <div class="row row-cols-1 row-cols-md-4 g-4 cards" id="cards">
     <div class="col">
       <div class="card h-100">
-        <img class="img_cards" src="" class="card-img-top" alt="..." />
+        <img class="img_cards" id="imgid" src="" class="card-img-top" alt="..." />
         <div class="card-body">
-          <h5 class="card-title">이름</h5>
+          <h5 class="card-title" id="nameid">이름</h5>
         </div>
       </div>
     </div>
