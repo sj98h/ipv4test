@@ -2,120 +2,104 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
-</head>
-<!-- 파이어베이스 스토리지 -->
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js"></script>
-<!-- 제이쿼리 -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- 파이어베이스 -->
-<script type="module">
-  // Firebase SDK 라이브러리 가져오기
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-  import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-  import {
-    collection,
-    addDoc,
-  } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-  import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
-  // 스토리지
-  // import { getStorage } from "firebase/storage";
-  import {getStorage} from "https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js";
-  // Firebase 구성 정보 설정
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyC5fodfunsbkD_YEDYmzpBa-ixZQnGbjV8",
-    authDomain: "ipv4-659be.firebaseapp.com",
-    projectId: "ipv4-659be",
-    storageBucket: "ipv4-659be.appspot.com",
-    messagingSenderId: "1009613858218",
-    appId: "1:1009613858218:web:8803e07dfa4b62634977d3",
-    measurementId: "G-VTWB9NL8HX",
-  };
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  </head>
+  <body>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <script type="module">
+      import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
+      import { getFirestore, collection, addDoc, getDocs } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+      import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js';
+  
+   
+      const firebaseConfig = {
+        apiKey: "AIzaSyC5fodfunsbkD_YEDYmzpBa-ixZQnGbjV8",
+        authDomain: "ipv4-659be.firebaseapp.com",
+        projectId: "ipv4-659be",
+        storageBucket: "ipv4-659be.appspot.com",
+        messagingSenderId: "1009613858218",
+        appId: "1:1009613858218:web:8803e07dfa4b62634977d3",
+        measurementId: "G-VTWB9NL8HX",
+      };
+  
 
-  // Firebase 인스턴스 초기화
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+      const storage = getStorage(app);
+  
+      $('#qwebtn').click(async function () {
+        const pfimgInput = $('#pfimg')[0];
+        const pfname = $('#pfname').val();
+        const pfhobby = $('#pfhobby').val();
+        const pfint = $('#pfint').val();
+        const pfgoals = $('#pfgoals').val();
+        const pfdtr = $('#pfdtr').val();
+  
+        const file = pfimgInput.files[0];
+  
+        if (!file) {
+          alert('업로드할 파일을 올려주세요.');
+          return;
+        }
+  
 
-  // $("#savebtn").click(async function () {
-  //   $("#여기들어갈건 멤버카드").toggle();
-  // });
+        const storageRef = ref(storage, 'images/' + file.name);
+  
 
-  // 모달 스크립트입니다
-  const modalBtn = document.querySelector(".modalss");
-  const closeBtn = document.querySelector(".closeModal");
-  // const modalWindow = document.querySelector(".modalWindow");
+        try {
+          await uploadBytes(storageRef, file);
+          const downloadURL = await getDownloadURL(storageRef);
+  
 
-  modalBtn.addEventListener("click", () => {
-    $('.modalWindow').show()
-  });
-  closeBtn.addEventListener("click", () => {
-    $('.modalWindow').hide()
-  })
+          const doc = {
+            pfimg: downloadURL,
+            pfname: pfname,
+            pfhobby: pfhobby,
+            pfint: pfint,
+            pfgoals: pfgoals,
+            pfdtr: pfdtr
+          };
+  
 
-  //등록 버튼
-  //    const submitBtn = document.querySelector("#qwebtn");
-  //     submitBtn.addEventListener("click", () => {
-  //       alert('완료');
-  //     });
-  $('#qwebtn').click(async function () {
-    let pfimg = $('#pfimg').val();
-    let pfname = $('#pfname').val();
-    let pfhobby = $('#pfhobby').val();
-    let pfint = $('#pfint').val();
-    let pfgoals = $('#pfgoals').val();
-    let pfdtr = $('#pfdtr').val();
-    let doc = {
-      pfimg: pfimg,
-      pfname: pfname,
-      pfhobby: pfhobby,
-      pfint: pfint,
-      pfgoals: pfgoals,
-      pfdtr: pfdtr
-    }
-
-    alert('테스트');
-
-    // 파이어베이스 스토리지
-    const storage = getStorage(app);
-    console.log(storage)
-    // 이미지파일 변수의 저장
-    var file = $('#pfimg').files[0];
-    // 기본골격
-    var storageRef = storage.ref();
-    // 저장할경로
-    var pathImg = storageRef.child('image/' + 'abcd');
-    // 업로드작업
-    pathImg.put(file)
-    // const storageRef = ref(storage, 'images/' + pfimgFile.name);
-    // await uploadBytes(storageRef, pfimgFile);
-    // const imgURL = await getDownloadURL(storageRef);
-
-    await addDoc(collection(db, 'inputdata'), doc);
-    window.location.reload();
-  })
-
-
-  async function displayCards() {
-    const querySnapshot = await getDocs(collection(db, 'inputdata'));
-    querySnapshot.forEach((doc) => {
-      const data = doc.data();
-      let temp_html = `
-    <div class="col">
-      <div class="card h-100">
-        <img class="img_cards" src="${data.pfimg}" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">${data.pfname}</h5>
-        </div>
-      </div>
-    </div>`;
-      $('.cards').append(temp_html);
-    });
-  }
+          await addDoc(collection(db, 'inputdata'), doc);
+          alert('성공했습니다.');
+          window.location.reload();
+        } catch (error) {
+          console.error('에러', error);
+          alert('에러');
+        }
+      });
+  
+      async function displayCards() {
+        const querySnapshot = await getDocs(collection(db, 'inputdata'));
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          const temp_html = `
+            <div class="col">
+              <div class="card h-100">
+                <img class="img_cards" src="${data.pfimg}" class="card-img-top" alt="..." />
+                <div class="card-body">
+                  <h5 class="card-title">${data.pfname}</h5>
+                </div>
+              </div>
+            </div>`;
+          $('.cards').append(temp_html);
+        });
+      }
+  
+      $(document).ready(function () {
+        displayCards();
+      });
 
   $(document).ready(function () {
     displayCards();
