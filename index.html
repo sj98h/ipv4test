@@ -37,11 +37,13 @@
   // Firebase 인스턴스 초기화
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+
   $('#test').click(async function () {
     let text = $('#input').val();
     let doc = {
       text: text
     }
+    
     await addDoc(collection(db, 'test'), doc);
     alert('테스트');
     window.location.reload();
