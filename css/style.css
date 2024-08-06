@@ -72,8 +72,7 @@ header {
   font-size: 30px;
 }
 
-
-.row-cols-md-4>* {
+.row-cols-md-4 > * {
   flex: 0 0 auto;
   width: 25%;
   height: auto;
@@ -83,12 +82,33 @@ header {
   height: 800px;
   width: 100%;
   padding: 100px;
+  padding-bottom: 30px;
 }
 
 .img_cards {
   height: 500px;
 }
 
-.savebutton>button {
+.savebutton > button {
   margin-left: 80%;
+}
+
+/* 모달 스타일 */
+.modalWindow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 500px;
+  overflow: scroll;
+  background-color: #fff;
+  border: 1px solid #000;
+}
+
+.modalWindow .closeModal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }
