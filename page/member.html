@@ -8,7 +8,11 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
 </head>
+<!-- 파이어베이스 스토리지 -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js"></script>
+<!-- 제이쿼리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- 파이어베이스 -->
 <script type="module">
   // Firebase SDK 라이브러리 가져오기
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
@@ -18,6 +22,7 @@
     addDoc,
   } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
   import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+  // 스토리지
   // import { getStorage } from "firebase/storage";
 
   // Firebase 구성 정보 설정
@@ -73,10 +78,10 @@
       pfdtr: pfdtr
     }
 
-    await addDoc(collection(db, 'inputdata'), doc);
-    const storage = firebase.storage();
-
     alert('테스트');
+
+    // 파이어베이스 스토리지
+    const storage = firebase.storage();
     // 이미지파일 변수의 저장
     var file = $('#pfimg').files[0];
     // 기본골격
@@ -89,6 +94,7 @@
     // await uploadBytes(storageRef, pfimgFile);
     // const imgURL = await getDownloadURL(storageRef);
 
+    await addDoc(collection(db, 'inputdata'), doc);
     window.location.reload();
   })
 
@@ -115,7 +121,6 @@
   });
 
 </script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js"></script>
 
 <style>
   @import url(../css/style.css);
