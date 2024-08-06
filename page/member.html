@@ -18,6 +18,7 @@
     addDoc,
   } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
   import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+  // import { getStorage } from "firebase/storage";
 
   // Firebase 구성 정보 설정
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -72,11 +73,23 @@
       pfdtr: pfdtr
     }
 
-
-
     await addDoc(collection(db, 'inputdata'), doc);
+    const storage = firebase.storage();
+
     alert('테스트');
-    // window.location.reload();
+    // 이미지파일 변수의 저장
+    var file = $('#pfimg').files[0];
+    // 기본골격
+    var storageRef = storage.ref();
+    // 저장할경로
+    var pathImg = storageRef.child('image/' + 'abcd');
+    // 업로드작업
+    var uploadImg = pathImg.put(file)
+    // const storageRef = ref(storage, 'images/' + pfimgFile.name);
+    // await uploadBytes(storageRef, pfimgFile);
+    // const imgURL = await getDownloadURL(storageRef);
+
+    window.location.reload();
   })
 
 
@@ -101,26 +114,8 @@
     displayCards();
   });
 
-  // let docs = await getDocs(collection(db, "inputdata"));
-  // docs.forEach((doc) => {
-  //   let row = doc.data();
-  //   let imgid = row['imgid'];
-  //   let nameid = row['nameid'];
-  //   let temp_html = `
-  //   <div class="col">
-  //     <div class="card h-100">
-  //       <img class="img_cards" src="${imgid}" class="card-img-top" alt="..." />
-  //       <div class="card-body">
-  //         <h5 class="card-title">${nameid}</h5>
-  //       </div>
-  //     </div>
-  //   </div>
-  // </div>`
-  // console.log(temp_html)
-  // $('#cards').append(temp_html);
-  // }
-  //   )
 </script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js"></script>
 
 <style>
   @import url(../css/style.css);
