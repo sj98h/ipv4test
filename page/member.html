@@ -24,7 +24,7 @@
   import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
   // 스토리지
   // import { getStorage } from "firebase/storage";
-
+  import {getStorage} from "https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js";
   // Firebase 구성 정보 설정
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   const firebaseConfig = {
@@ -81,7 +81,8 @@
     alert('테스트');
 
     // 파이어베이스 스토리지
-    const storage = firebase.storage();
+    const storage = getStorage(app);
+    console.log(storage)
     // 이미지파일 변수의 저장
     var file = $('#pfimg').files[0];
     // 기본골격
@@ -89,7 +90,7 @@
     // 저장할경로
     var pathImg = storageRef.child('image/' + 'abcd');
     // 업로드작업
-    var uploadImg = pathImg.put(file)
+    pathImg.put(file)
     // const storageRef = ref(storage, 'images/' + pfimgFile.name);
     // await uploadBytes(storageRef, pfimgFile);
     // const imgURL = await getDownloadURL(storageRef);
