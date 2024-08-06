@@ -84,7 +84,8 @@
     const storage = getStorage(app);
     console.log(storage)
     // 이미지파일 변수의 저장
-    var file = $('#pfimg').files[0];
+    var file = document.querySelector('#pfimg').files[0];
+    console.log(file)
     // 기본골격
     var storageRef = storage.ref();
     // 저장할경로
