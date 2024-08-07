@@ -42,7 +42,6 @@
       const pfimgInput = $('#pfimg')[0];
       const pfname = $('#pfname').val();
       const pfhobby = $('#pfhobby').val();
-      const pfint = $('#pfint').val();
       const pfgoals = $('#pfgoals').val();
       const pfdtr = $('#pfdtr').val();
       const pfmbti = $('#pfmbti').val();
@@ -68,10 +67,10 @@
           pfimg: downloadURL,
           pfname: pfname,
           pfhobby: pfhobby,
-          pfint: pfint,
           pfgoals: pfgoals,
           pfdtr: pfdtr,
-          pfmbti: pfmbti
+          pfmbti: pfmbti,
+          pfblog: pfblog
         };
 
 
@@ -94,11 +93,11 @@
         <div class="card h-100" 
              data-pfimg="${data.pfimg}" 
              data-pfname="${data.pfname}" 
-             data-pfhobby="${data.pfhobby}" 
-             data-pfint="${data.pfint}" 
+             data-pfhobby="${data.pfhobby}"  
              data-pfgoals="${data.pfgoals}" 
              data-pfdtr="${data.pfdtr}"
-             data-pfmbti="${data.pfmbti}">
+             data-pfmbti="${data.pfmbti}"
+             data-pfblog="${data.pfblog}">
           <img class="img_cards" src="${data.pfimg}" class="card-img-top" alt="..." />
           <div class="card-body">
             <h5 class="card-title">${data.pfname}</h5>
@@ -124,6 +123,7 @@
         const pfgoals = $(this).data('pfgoals');
         const pfdtr = $(this).data('pfdtr');
         const pfmbti = $(this).data('pfmbti');
+        const pfblog = $(this).data('pfblog');
 
         // 모달에 데이터 표시
         $('.modalimg').html(`<img src="${pfimg}" alt="..." />`);
@@ -135,7 +135,7 @@
       <h3>취미</h3>
       <p>${pfhobby}</p>
       <h3>blog</h3>
-      <p>${pfint}</p>
+      <p>${pfblog}</p>
     `);
         $('.modal2').html(`
       <h3>계기</h3>
@@ -189,12 +189,12 @@
 
       <div class="nametxt">
         <input placeholder="이름을 입력해주세요." type="text" id="pfname">
-        <input placeholder="MBTI를 입력하세요." type="text" id = "pfmbti">
+        <input placeholder="MBTI를 입력하세요." type="text" id="pfmbti">
       </div>
 
       <div class="hobbytxt">
         <input placeholder="취미" type="text" id="pfhobby">
-        <input placeholder="blog 주소 입력" type="text">
+        <input placeholder="blog 주소 입력" type="text" id="pfblog">
       </div>
 
       <div class="input-group itr">
