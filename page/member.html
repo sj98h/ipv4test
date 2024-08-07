@@ -37,6 +37,8 @@
       const db = getFirestore(app);
       const storage = getStorage(app);
   
+      //===============================================
+
       $('#qwebtn').click(async function () {
         const pfimgInput = $('#pfimg')[0];
         const pfname = $('#pfname').val();
@@ -102,6 +104,18 @@
       });
 
 
+   // 모달 스크립트입니다
+   const modalBtn = document.querySelector(".modalss");
+    const closeBtn = document.querySelector(".closeModal");
+    // const modalWindow = document.querySelector(".modalWindow");
+
+    modalBtn.addEventListener("click", () => {
+      $('.modalWindow').show()
+
+    });
+    closeBtn.addEventListener("click", ()=> {
+        $('.modalWindow').hide()
+    })
 </script>
 
 <style>
@@ -129,17 +143,17 @@
     </div>
 
     <div class="input-group itr">
-      <span class="input-group-text">관심사</span>
+      <span class="input-group-text gray-box">관심사</span>
       <textarea class="form-control" aria-label="With textarea" id="pfint"></textarea>
     </div>
 
     <div class="input-group goals">
-      <span class="input-group-text">목표</span>
+      <span class="input-group-text gray-box">목표</span>
       <textarea class="form-control" aria-label="With textarea" id="pfgoals"></textarea>
     </div>
 
     <div class="input-group dtn">
-      <span class="input-group-text">각오</span>
+      <span class="input-group-text gray-box">각오</span>
       <textarea class="form-control" aria-label="With textarea" id="pfdtr"></textarea>
     </div>
 
@@ -160,15 +174,17 @@
     <button type="button" class="btn btn-outline-light">MEMBERS</button>
     <button type="button" class="btn btn-outline-light">NEWS</button>
   </div>
+  <!-- 이름 카드 -->
   <div class="row row-cols-1 row-cols-md-4 g-4 cards" id="cards">
-    <div class="col">
+    <!-- 기본 골격 -->
+    <!-- <div class="col">
       <div class="card h-100">
         <img class="img_cards" id="imgid" src="" class="card-img-top" alt="..." />
         <div class="card-body">
           <h5 class="card-title" id="nameid">이름</h5>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 
   <div class="savebutton">

@@ -108,7 +108,7 @@ header {
 
   padding: 30px;
 
-  /* display: none; */
+  display: none;
 }
 
 .modalWindow .closeModal {
@@ -119,14 +119,17 @@ header {
 }
 
 /*이름,mbti*/
-.nametxt, .hobbytxt{
+.nametxt,
+.hobbytxt {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 10px;
 }
 
 /*취미,블로그*/
-.nametxt input, .hobbytxt input {
+.nametxt input,
+.hobbytxt input {
   width: 200px !important;
   height: 50px !important;
 
@@ -134,17 +137,26 @@ header {
   margin-bottom: 5px;
 }
 
-.itr, .dtn, .goals, .imgfile {
-  margin-bottom: 5px;
+.itr,
+.dtn,
+.goals,
+.imgfile {
+  margin-top: 5px;
 }
 
 .btnbtn {
   display: flex;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
   margin-top: 5px;
 }
 
 .qwe {
   margin-right: 5px;
+}
+
+.gray-box {
+  width: 80px;
+  text-align: center;
+  justify-content: center;
 }
