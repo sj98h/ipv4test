@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-  <html lang="en">
+<html lang="en">
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+</head>
 
 <body>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
@@ -83,11 +83,12 @@
       }
     });
 
+    // 멤버 카드 모달 파이어베이스 데이터 적용
     async function displayCards() {
-  const querySnapshot = await getDocs(collection(db, 'inputdata'));
-  querySnapshot.forEach((doc) => {
-    const data = doc.data();
-    const temp_html = `
+      const querySnapshot = await getDocs(collection(db, 'inputdata'));
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const temp_html = `
       <div class="col">
         <div class="card h-100" 
              data-pfimg="${data.pfimg}" 
@@ -102,28 +103,30 @@
           </div>
         </div>
       </div>`;
-    $('.cards').append(temp_html);
-  });
-}
+        $('.cards').append(temp_html);
+      });
+    }
 
 
 
-  $(document).ready(function () {
-    displayCards();
 
-    // 카드 클릭 시 모달에 데이터 표시
-  $('.cards').on('click', '.card', function() {
-    const pfimg = $(this).data('pfimg');
-    const pfname = $(this).data('pfname');
-    const pfhobby = $(this).data('pfhobby');
-    const pfint = $(this).data('pfint');
-    const pfgoals = $(this).data('pfgoals');
-    const pfdtr = $(this).data('pfdtr');
-    
-    // 모달에 데이터 표시
-    $('.modalimg').html(`<img src="${pfimg}" alt="..." />`);
-    $('.modal-header').html(`<h1 class="modal-title fs-5" id="exampleModalCenteredScrollableTitle">${pfname}</h1>`)
-    $('.modaltxt').html(`
+    $(document).ready(function () {
+      displayCards();
+
+      // 카드 클릭 시 모달에 데이터 표시
+      $('.cards').on('click', '.card', function () {
+        const pfimg = $(this).data('pfimg');
+        const pfname = $(this).data('pfname');
+        const pfhobby = $(this).data('pfhobby');
+        const pfint = $(this).data('pfint');
+        const pfgoals = $(this).data('pfgoals');
+        const pfdtr = $(this).data('pfdtr');
+
+        // 모달에 데이터 표시
+        $('.modalimg').html(`<img src="${pfimg}" alt="..." />`);
+        $('.modal-header').html(`<h1 class="modal-title fs-5" id="exampleModalCenteredScrollableTitle">${pfname}</h1>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>`)
+        $('.modaltxt').html(`
       <h3>MBTI</h3>
       <p>${pfname}</p>
       <h3>취미</h3>
@@ -131,21 +134,21 @@
       <h3>blog</h3>
       <p>${pfint}</p>
     `);
-    $('.modal2').html(`
+        $('.modal2').html(`
       <h3>계기</h3>
       <p>${pfgoals}</p>
       <h3>목표</h3>
       <p>${pfdtr}</p>
     `);
-    
-    $('.clickmodal').show();
-  });
 
-  // 모달 닫기
-  $('.btn-close').click(function() {
-    $('.clickmodal').hide();
-  });
-});
+        $('.clickmodal').show();
+      });
+
+      // 모달 닫기
+      // $('.btn-close').click(function() {
+      //   $('.clickmodal').hide();
+      // });
+    });
 
 
     // 모달 스크립트입니다
@@ -162,11 +165,8 @@
 
 
     // 클릭 모달 닫기
-    const clickCloseBtn = document.querySelector(".btn-close");
 
-    clickCloseBtn.addEventListener("click", () => {
-      $('.clickmodal').hide()
-    })
+
   </script>
 
   <style>
@@ -221,7 +221,7 @@
     <div class="clickmodal">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalCenteredScrollableTitle">이름이 들어감</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">x</button> -->
       </div>
       <div class="bodymodal">
 

@@ -232,3 +232,8 @@ header {
   padding: 20px;
   overflow: scroll;
 }
+
+.modalimg img {
+  width: 100%;
+  height: 100%;
+}
