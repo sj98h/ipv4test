@@ -125,7 +125,7 @@
         // 모달에 데이터 표시
         $('.modalimg').html(`<img src="${pfimg}" alt="..." />`);
         $('.modal-header').html(`<h1 class="modal-title fs-5" id="exampleModalCenteredScrollableTitle">${pfname}</h1>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>`)
+      <p class="btn-close"></p>`)
         $('.modaltxt').html(`
       <h3>MBTI</h3>
       <p>${pfname}</p>
@@ -145,9 +145,10 @@
       });
 
       // 모달 닫기
-      // $('.btn-close').click(function() {
-      //   $('.clickmodal').hide();
-      // });
+      // console.log($('.btn-close'))
+      $('.clickmodal').on('click', '.btn-close', function () {
+        $('.clickmodal').hide();
+        });
     });
 
 
