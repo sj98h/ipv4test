@@ -122,6 +122,7 @@
     
     // 모달에 데이터 표시
     $('.modalimg').html(`<img src="${pfimg}" alt="..." />`);
+    $('.modal-header').html(`<h1 class="modal-title fs-5" id="exampleModalCenteredScrollableTitle">${pfname}</h1>`)
     $('.modaltxt').html(`
       <h3>MBTI</h3>
       <p>${pfname}</p>
@@ -219,7 +220,7 @@
     <!-- 카드클릭모달 -->
     <div class="clickmodal">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalCenteredScrollableTitle">Modal title</h1>
+        <h1 class="modal-title fs-5" id="exampleModalCenteredScrollableTitle">이름이 들어감</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="bodymodal">
