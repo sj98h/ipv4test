@@ -108,6 +108,9 @@
     const cards = $('.cards .card');
     const index = cards.index($(this));
     alert(`선택한 박스의 index는 ${index}입니다.`);
+    // 카드 클릭 시 모달 열기
+    $('.clickmodal').show()
+
   });
     });
 
@@ -125,11 +128,7 @@
     })
 
 
-    // 클릭 모달
-    // const clickModalCard = document.querySelectorAll(".cards .card");
-
-
-    
+    // 클릭 모달 닫기
     const clickCloseBtn = document.querySelector(".btn-close");
 
     clickCloseBtn.addEventListener("click", () => {
