@@ -187,7 +187,7 @@ header {
 }
 
 .modaltxt {
-  background-color: rgb(124, 72, 72);
+  
   width: 50%;
   height: 400px;
 
@@ -204,12 +204,25 @@ header {
 }
 
 .modal2 {
-  background-color: rgb(124, 72, 72);
+  
   width: auto;
   height: auto;
   margin-top: 10px;
-  font-size: 40px;
 
+
+}
+
+.modal2 h3 {
+  font-size: 40px;
+  text-align: left;
+}
+
+.modal2 p {
+  border: 1px solid rgb(59, 58, 58);
+  padding: 3px;
+  width: auto;
+  font-size: 30px;
+  word-break: break-all;
 }
 
 .modaltxt h3 {
@@ -221,5 +234,7 @@ header {
 }
 
 .bodymodal {
+  height: 88%;
   padding: 20px;
+  overflow :scroll;
 }
