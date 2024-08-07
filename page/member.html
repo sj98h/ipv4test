@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <!DOCTYPE html>
   <html lang="en">
 
   <head>
@@ -106,13 +102,19 @@
 
     $(document).ready(function () {
       displayCards();
+      // 카드 렌더링 후 카드 클릭 부분
+      $('.cards').on('click', '.card', function() {
+    // 클릭된 카드의 인덱스 계산
+    const cards = $('.cards .card');
+    const index = cards.index($(this));
+    alert(`선택한 박스의 index는 ${index}입니다.`);
+  });
     });
 
 
     // 모달 스크립트입니다
     const modalBtn = document.querySelector(".modalss");
     const closeBtn = document.querySelector(".closeModal");
-    // const modalWindow = document.querySelector(".modalWindow");
 
     modalBtn.addEventListener("click", () => {
       $('.modalWindow').show()
@@ -122,6 +124,17 @@
       $('.modalWindow').hide()
     })
 
+
+    // 클릭 모달
+    // const clickModalCard = document.querySelectorAll(".cards .card");
+
+
+    
+    const clickCloseBtn = document.querySelector(".btn-close");
+
+    clickCloseBtn.addEventListener("click", () => {
+      $('.clickmodal').hide()
+    })
   </script>
 
   <style>
@@ -215,7 +228,7 @@
       <button type="button" class="btn btn-outline-light">NEWS</button>
     </div>
     <!-- 이름 카드 -->
-    <div class="row row-cols-1 row-cols-md-4 g-4 cards" id="cards">
+    <div class="row row-cols-1 row-cols-md-4 g-4 cards">
       <!-- 기본 골격 -->
       <!-- <div class="col">
       <div class="card h-100">
