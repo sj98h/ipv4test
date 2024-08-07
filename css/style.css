@@ -72,7 +72,7 @@ header {
   font-size: 30px;
 }
 
-.row-cols-md-4 > * {
+.row-cols-md-4>* {
   flex: 0 0 auto;
   width: 25%;
   height: auto;
@@ -90,13 +90,14 @@ header {
   height: 500px;
 }
 
-.savebutton > button {
+.savebutton>button {
   margin-left: 80%;
-  }
-  .savebutton{
-    position: sticky;
-    bottom: 50px;
-  }
+}
+
+.savebutton {
+  position: sticky;
+  bottom: 50px;
+}
 
 /* 모달 스타일 */
 .modalWindow {
@@ -165,31 +166,59 @@ header {
   text-align: center;
   justify-content: center;
 }
+
 /* 카드열기모달 */
 .clickmodal {
   width: 700px;
-  height: 500px;
+  height: 700px;
   background-color: white;
   position: absolute;
-  top : 50%;
-  left : 50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
 }
+
 .modalimg {
   background-color: black;
   width: 50%;
-  height: 50%;
-  margin-left: 50px;
+  height: 400px;
 }
+
 .modaltxt {
   background-color: rgb(124, 72, 72);
-  width: 20%;
-  height: 20%;
-  margin-left: 50px;
+  width: 50%;
+  height: 400px;
+
+  text-align: center;
+  font-size: 30px;
+
 }
+
 .modal1 {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: flex;
+
+}
+
+.modal2 {
+  background-color: rgb(124, 72, 72);
+  width: auto;
+  height: auto;
+  margin-top: 10px;
+  font-size: 40px;
+
+}
+
+.modaltxt h3 {
+  font-size: 40px;
+}
+
+.modaltxt p {
+  margin-bottom: 5px;
+}
+
+.bodymodal {
+  padding: 20px;
 }
