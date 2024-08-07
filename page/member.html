@@ -46,6 +46,7 @@
       const pfdtr = $('#pfdtr').val();
       const pfmbti = $('#pfmbti').val();
       const pfblog = $('#pfblog').val();
+      const pfint = $('#pfint').val();
 
       const file = pfimgInput.files[0];
 
@@ -70,7 +71,8 @@
           pfgoals: pfgoals,
           pfdtr: pfdtr,
           pfmbti: pfmbti,
-          pfblog: pfblog
+          pfblog: pfblog,
+          pfint: pfint
         };
 
 
@@ -94,10 +96,11 @@
              data-pfimg="${data.pfimg}" 
              data-pfname="${data.pfname}" 
              data-pfhobby="${data.pfhobby}"  
-             data-pfgoals="${data.pfgoals}" 
+             data-pfgoals="${data.pfgoals}"  
              data-pfdtr="${data.pfdtr}"
              data-pfmbti="${data.pfmbti}"
-             data-pfblog="${data.pfblog}">
+             data-pfblog="${data.pfblog}"
+             data-pfint="${data.pfint}">
           <img class="img_cards" src="${data.pfimg}" class="card-img-top" alt="..." />
           <div class="card-body">
             <h5 class="card-title">${data.pfname}</h5>
@@ -119,11 +122,11 @@
         const pfimg = $(this).data('pfimg');
         const pfname = $(this).data('pfname');
         const pfhobby = $(this).data('pfhobby');
-        const pfint = $(this).data('pfint');
         const pfgoals = $(this).data('pfgoals');
         const pfdtr = $(this).data('pfdtr');
         const pfmbti = $(this).data('pfmbti');
         const pfblog = $(this).data('pfblog');
+        const pfint = $(this).data('pfint');
 
         // 모달에 데이터 표시
         $('.modalimg').html(`<img src="${pfimg}" alt="..." />`);
@@ -131,7 +134,7 @@
       <p class="btn-close"></p>`)
         $('.modaltxt').html(`
       <h3>MBTI</h3>
-      <p>${pfname}</p>
+      <p>${pfmbti}</p>
       <h3>취미</h3>
       <p>${pfhobby}</p>
       <h3>blog</h3>
@@ -139,8 +142,10 @@
     `);
         $('.modal2').html(`
       <h3>계기</h3>
-      <p>${pfgoals}</p>
+      <p>${pfint}</p>
       <h3>목표</h3>
+      <p>${pfgoals}</p>
+      <h3>각오</h3>
       <p>${pfdtr}</p>
     `);
 
@@ -198,7 +203,7 @@
       </div>
 
       <div class="input-group itr">
-        <span class="input-group-text gray-box">관심사</span>
+        <span class="input-group-text gray-box">계기</span>
         <textarea class="form-control" aria-label="With textarea" id="pfint"></textarea>
       </div>
 
