@@ -72,7 +72,6 @@
           pfgoals: pfgoals,
           pfdtr: pfdtr,
           pfmbti: pfmbti
-
         };
 
 
@@ -124,6 +123,7 @@
         const pfint = $(this).data('pfint');
         const pfgoals = $(this).data('pfgoals');
         const pfdtr = $(this).data('pfdtr');
+        const pfmbti = $(this).data('pfmbti');
 
         // 모달에 데이터 표시
         $('.modalimg').html(`<img src="${pfimg}" alt="..." />`);
@@ -189,7 +189,7 @@
 
       <div class="nametxt">
         <input placeholder="이름을 입력해주세요." type="text" id="pfname">
-        <input placeholder="MBTI를 입력하세요." type="text">
+        <input placeholder="MBTI를 입력하세요." type="text" id = "pfmbti">
       </div>
 
       <div class="hobbytxt">
