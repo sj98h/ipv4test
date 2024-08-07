@@ -70,7 +70,9 @@
           pfhobby: pfhobby,
           pfint: pfint,
           pfgoals: pfgoals,
-          pfdtr: pfdtr
+          pfdtr: pfdtr,
+          pfmbti: pfmbti
+
         };
 
 
@@ -96,7 +98,8 @@
              data-pfhobby="${data.pfhobby}" 
              data-pfint="${data.pfint}" 
              data-pfgoals="${data.pfgoals}" 
-             data-pfdtr="${data.pfdtr}">
+             data-pfdtr="${data.pfdtr}"
+             data-pfmbti="${data.pfmbti}">
           <img class="img_cards" src="${data.pfimg}" class="card-img-top" alt="..." />
           <div class="card-body">
             <h5 class="card-title">${data.pfname}</h5>
@@ -148,7 +151,7 @@
       // console.log($('.btn-close'))
       $('.clickmodal').on('click', '.btn-close', function () {
         $('.clickmodal').hide();
-        });
+      });
     });
 
 
@@ -256,8 +259,8 @@
       <p>SoD</p>
     </header>
     <div class="btndiv">
-      <button type="button" class="btn btn-outline-light">HOME</button>
-      <button type="button" class="btn btn-outline-light">MEMBERS</button>
+      <button type="button" class="btn btn-outline-light" onclick = "location.href = '../index.html' " > HOME</button>
+    <button type="button" class="btn btn-outline-light" onclick = "location.href = './member.html' ">MEMBERS</button>
       <button type="button" class="btn btn-outline-light">NEWS</button>
     </div>
     <!-- 이름 카드 -->
