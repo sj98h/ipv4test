@@ -242,7 +242,7 @@ header {
 }
 /* 뉴스 */
 .news-content {
-  background-color: white;
+  background-color: black;
   width:  1500px;
   min-height: 700px ;
   margin: auto;
@@ -250,7 +250,9 @@ header {
 }
 
 .news-content li {
-  background-color: white;
+  background-color: black;
+  border-bottom: 1px solid white;
+  color: white;
 }
 
 .newstitle {
