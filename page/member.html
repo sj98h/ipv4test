@@ -17,7 +17,7 @@
 
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
-    import { getFirestore, collection, addDoc, getDocs } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+    import { getFirestore, collection, addDoc, getDocs, deleteDoc } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
     import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js';
 
 
@@ -111,9 +111,6 @@
       });
     }
 
-
-
-
     $(document).ready(function () {
       displayCards();
 
@@ -152,6 +149,22 @@
         $('.clickmodal').show();
       });
 
+      // 클릭 모달 삭제
+      const deletebtn = document.querySelector("#deletebtn");
+      deletebtn.addEventListener("click", async function () {
+
+        const pfimg = $(".card").data('pfimg');
+        const pfname = $(".card").data('pfname');
+        const pfhobby = $(".card").data('pfhobby');
+        const pfgoals = $(".card").data('pfgoals');
+        const pfdtr = $(".card").data('pfdtr');
+        const pfmbti = $(".card").data('pfmbti');
+        const pfblog = $(".card").data('pfblog');
+        const pfint = $(".card").data('pfint');
+
+        await deleteDoc(collection(db, "inputdata"));
+      });
+
       // 모달 닫기
       // console.log($('.btn-close'))
       $('.clickmodal').on('click', '.btn-close', function () {
@@ -171,11 +184,6 @@
     closeBtn.addEventListener("click", () => {
       $('.modalWindow').hide()
     })
-
-
-    // 클릭 모달 닫기
-
-
   </script>
 
   <style>
@@ -233,12 +241,9 @@
         <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">x</button> -->
       </div>
       <div class="bodymodal">
-
         <div class="modal1">
-
           <div class="modalimg">
           </div>
-
           <div class="modaltxt">
             <h3>MBTI</h3>
             <p>mbti자리입니다</p>
@@ -256,6 +261,7 @@
           <h3>각오</h3>
           <p>각오자리입니다</p>
         </div>
+        <button class="deletebtn" id="deletebtn">삭제하기</button>
       </div>
     </div>
     <!-- 카드클릭모달끝 -->
@@ -264,9 +270,9 @@
       <p>SoD</p>
     </header>
     <div class="btndiv">
-      <button type="button" class="btn btn-outline-light" onclick = "location.href = '../index.html' " > HOME</button>
-    <button type="button" class="btn btn-outline-light" onclick = "location.href = './member.html' ">MEMBERS</button>
-      <button type="button" class="btn btn-outline-light" onclick = "location.href = './newsreal.html'">NEWS</button>
+      <button type="button" class="btn btn-outline-light" onclick="location.href = '../index.html' "> HOME</button>
+      <button type="button" class="btn btn-outline-light" onclick="location.href = './member.html' ">MEMBERS</button>
+      <button type="button" class="btn btn-outline-light" onclick="location.href = './newsreal.html'">NEWS</button>
     </div>
     <!-- 이름 카드 -->
     <div class="row row-cols-1 row-cols-md-4 g-4 cards">
