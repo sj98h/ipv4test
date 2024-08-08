@@ -123,7 +123,8 @@
       displayCards();
 
       // 삭제버튼 누르면 삭제 기능
-      $(".cards").on("click", ".btn-delete", async function () {
+      $(".cards").on("click", ".btn-delete", async function (event) {
+        event.stopPropagation(); // 모달 열리는거 막음
         const docId = $(this).data("id"); // 삭제할 문서 ID 가져오기
         try {
           await deleteDoc(doc(db, "inputdata", docId)); // 해당 문서 삭제
