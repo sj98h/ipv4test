@@ -1,23 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
-</head>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   <script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
-    import {updateDoc, deleteField, getFirestore, collection, addDoc, getDocs, deleteDoc } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
-    import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js';
-
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import {
+      getFirestore,
+      doc,
+      deleteDoc,
+      collection,
+      addDoc,
+      getDocs,
+    } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+    import {
+      getStorage,
+      ref,
+      uploadBytes,
+      getDownloadURL,
+    } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyC5fodfunsbkD_YEDYmzpBa-ixZQnGbjV8",
@@ -29,40 +43,34 @@
       measurementId: "G-VTWB9NL8HX",
     };
 
-
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
     const storage = getStorage(app);
 
-    //===============================================
-
-    $('#qwebtn').click(async function () {
-      const pfimgInput = $('#pfimg')[0];
-      const pfname = $('#pfname').val();
-      const pfhobby = $('#pfhobby').val();
-      const pfgoals = $('#pfgoals').val();
-      const pfdtr = $('#pfdtr').val();
-      const pfmbti = $('#pfmbti').val();
-      const pfblog = $('#pfblog').val();
-      const pfint = $('#pfint').val();
+    $("#qwebtn").click(async function () {
+      const pfimgInput = $("#pfimg")[0];
+      const pfname = $("#pfname").val();
+      const pfhobby = $("#pfhobby").val();
+      const pfgoals = $("#pfgoals").val();
+      const pfdtr = $("#pfdtr").val();
+      const pfmbti = $("#pfmbti").val();
+      const pfblog = $("#pfblog").val();
+      const pfint = $("#pfint").val();
 
       const file = pfimgInput.files[0];
 
       if (!file) {
-        alert('업로드할 파일을 올려주세요.');
+        alert("업로드할 파일을 올려주세요.");
         return;
       }
 
-
-      const storageRef = ref(storage, 'images/' + file.name);
-
+      const storageRef = ref(storage, "images/" + file.name);
 
       try {
         await uploadBytes(storageRef, file);
         const downloadURL = await getDownloadURL(storageRef);
 
-
-        const doc = {
+        const docData = {
           pfimg: downloadURL,
           pfname: pfname,
           pfhobby: pfhobby,
@@ -70,121 +78,117 @@
           pfdtr: pfdtr,
           pfmbti: pfmbti,
           pfblog: pfblog,
-          pfint: pfint
+          pfint: pfint,
         };
 
-
-        await addDoc(collection(db, 'inputdata'), doc);
-        alert('성공했습니다.');
+        await addDoc(collection(db, "inputdata"), docData);
+        alert("성공했습니다.");
         window.location.reload();
       } catch (error) {
-        console.error('에러', error);
-        alert('에러');
+        console.error("에러", error);
+        alert("에러");
       }
     });
 
-    // 멤버 카드 모달 파이어베이스 데이터 적용
     async function displayCards() {
-      const querySnapshot = await getDocs(collection(db, 'inputdata'));
+      const querySnapshot = await getDocs(collection(db, "inputdata"));
+      $(".cards").empty(); // 기존 카드 내용 삭제
       querySnapshot.forEach((doc) => {
         const data = doc.data();
+        const docId = doc.id; // 문서 ID 가져오기
         const temp_html = `
-      <div class="col">
-        <div class="card h-100" 
-             data-pfimg="${data.pfimg}" 
-             data-pfname="${data.pfname}" 
-             data-pfhobby="${data.pfhobby}"  
-             data-pfgoals="${data.pfgoals}"  
-             data-pfdtr="${data.pfdtr}"
-             data-pfmbti="${data.pfmbti}"
-             data-pfblog="${data.pfblog}"
-             data-pfint="${data.pfint}">
-          <img class="img_cards" src="${data.pfimg}" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">${data.pfname}</h5>
+        <div class="col">
+          <div class="card h-100" 
+               data-id="${docId}"
+               data-pfimg="${data.pfimg}" 
+               data-pfname="${data.pfname}" 
+               data-pfhobby="${data.pfhobby}"  
+               data-pfgoals="${data.pfgoals}"  
+               data-pfdtr="${data.pfdtr}"
+               data-pfmbti="${data.pfmbti}"
+               data-pfblog="${data.pfblog}"
+               data-pfint="${data.pfint}">
+            <img class="img_cards" src="${data.pfimg}" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">${data.pfname}</h5>
+              <button class="btn btn-danger btn-delete" data-id="${docId}">삭제하기</button>
+            </div>
           </div>
-        </div>
-      </div>`;
-        $('.cards').append(temp_html);
+        </div>`;
+        $(".cards").append(temp_html);
       });
     }
 
     $(document).ready(function () {
       displayCards();
 
+      $(".cards").on("click", ".btn-delete", async function () {
+        const docId = $(this).data("id"); // 삭제할 문서 ID 가져오기
+        try {
+          const docRef = doc(db, "inputdata", docId); // 문서 참조 생성
+          await deleteDoc(docRef); // 해당 문서 삭제
+          alert("삭제되었습니다.");
+          window.location.reload(); // 페이지 새로 고침
+        } catch (error) {
+          console.error("삭제 오류", error);
+          alert("응안돼");
+        }
+      });
+
       // 카드 클릭 시 모달에 데이터 표시
-      $('.cards').on('click', '.card', function () {
-        const pfimg = $(this).data('pfimg');
-        const pfname = $(this).data('pfname');
-        const pfhobby = $(this).data('pfhobby');
-        const pfgoals = $(this).data('pfgoals');
-        const pfdtr = $(this).data('pfdtr');
-        const pfmbti = $(this).data('pfmbti');
-        const pfblog = $(this).data('pfblog');
-        const pfint = $(this).data('pfint');
+      $(".cards").on("click", ".card", function () {
+        const pfimg = $(this).data("pfimg");
+        const pfname = $(this).data("pfname");
+        const pfhobby = $(this).data("pfhobby");
+        const pfgoals = $(this).data("pfgoals");
+        const pfdtr = $(this).data("pfdtr");
+        const pfmbti = $(this).data("pfmbti");
+        const pfblog = $(this).data("pfblog");
+        const pfint = $(this).data("pfint");
 
         // 모달에 데이터 표시
-        $('.modalimg').html(`<img src="${pfimg}" alt="..." />`);
-        $('.modal-header').html(`<h1 class="modal-title fs-5" id="exampleModalCenteredScrollableTitle">${pfname}</h1>
-      <p class="btn-close"></p>`)
-        $('.modaltxt').html(`
-      <h3>MBTI</h3>
-      <p>${pfmbti}</p>
-      <h3>취미</h3>
-      <p>${pfhobby}</p>
-      <h3>blog</h3>
-      <p>${pfblog}</p>
-    `);
-        $('.modal2').html(`
-      <h3>계기</h3>
-      <p>${pfint}</p>
-      <h3>목표</h3>
-      <p>${pfgoals}</p>
-      <h3>각오</h3>
-      <p>${pfdtr}</p>
-    `);
+        $(".modalimg").html(`<img src="${pfimg}" alt="..." />`);
+        $(
+          ".modal-header"
+        ).html(`<h1 class="modal-title fs-5" id="exampleModalCenteredScrollableTitle">${pfname}</h1>
+        <p class="btn-close"></p>`);
+        $(".modaltxt").html(`
+        <h3>MBTI</h3>
+        <p>${pfmbti}</p>
+        <h3>취미</h3>
+        <p>${pfhobby}</p>
+        <h3>blog</h3>
+        <p>${pfblog}</p>
+      `);
+        $(".modal2").html(`
+        <h3>계기</h3>
+        <p>${pfint}</p>
+        <h3>목표</h3>
+        <p>${pfgoals}</p>
+        <h3>각오</h3>
+        <p>${pfdtr}</p>
+      `);
 
-        $('.clickmodal').show();
+        $(".clickmodal").show();
       });
-
-      // 클릭 모달 삭제
-      // const inputdataid = "zzbI2jJka8sdor31RzhD"
-      const deletebtn = document.querySelector("#deletebtn");
-      deletebtn.addEventListener("click", async function () {
-        
-        // const pfimg = $(".card").data('pfimg');
-        // const pfname = $(".card").data('pfname');
-        // const pfhobby = $(".card").data('pfhobby');
-        // const pfgoals = $(".card").data('pfgoals');
-        // const pfdtr = $(".card").data('pfdtr');
-        // const pfmbti = $(".card").data('pfmbti');
-        // const pfblog = $(".card").data('pfblog');
-        // const pfint = $(".card").data('pfint');
-
-        await deleteDoc(collection(db, "inputdata"));
-      });
-
-  
 
       // 모달 닫기
-      // console.log($('.btn-close'))
-      $('.clickmodal').on('click', '.btn-close', function () {
-        $('.clickmodal').hide();
+      $(".clickmodal").on("click", ".btn-close", function () {
+        $(".clickmodal").hide();
+      });
+
+      // 멤버 추가 모달 열기
+      const modalBtn = document.querySelector(".modalss");
+      const closeBtn = document.querySelector(".closeModal");
+
+      modalBtn.addEventListener("click", () => {
+        $(".modalWindow").show();
+      });
+
+      closeBtn.addEventListener("click", () => {
+        $(".modalWindow").hide();
       });
     });
-
-
-    // 모달 스크립트입니다
-    const modalBtn = document.querySelector(".modalss");
-    const closeBtn = document.querySelector(".closeModal");
-
-    modalBtn.addEventListener("click", () => {
-      $('.modalWindow').show()
-
-    });
-    closeBtn.addEventListener("click", () => {
-      $('.modalWindow').hide()
-    })
   </script>
 
   <style>
@@ -195,56 +199,55 @@
     <!-- 모달 -->
     <div class="modalWindow">
       <p class="closeModal">X</p>
-
       <div class="input-group imgfile">
-        <input accept="img/*" type="file" class="form-control" id="pfimg">
+        <input accept="img/*" type="file" class="form-control" id="pfimg" />
         <label class="input-group-text" for="pfimg">Upload</label>
       </div>
-
       <div class="nametxt">
-        <input placeholder="이름을 입력해주세요." type="text" id="pfname">
-        <input placeholder="MBTI를 입력하세요." type="text" id="pfmbti">
+        <input placeholder="이름을 입력해주세요." type="text" id="pfname" />
+        <input placeholder="MBTI를 입력하세요." type="text" id="pfmbti" />
       </div>
-
       <div class="hobbytxt">
-        <input placeholder="취미" type="text" id="pfhobby">
-        <input placeholder="blog 주소 입력" type="text" id="pfblog">
+        <input placeholder="취미" type="text" id="pfhobby" />
+        <input placeholder="blog 주소 입력" type="text" id="pfblog" />
       </div>
-
       <div class="input-group itr">
         <span class="input-group-text gray-box">계기</span>
-        <textarea class="form-control" aria-label="With textarea" id="pfint"></textarea>
+        <textarea
+          class="form-control"
+          aria-label="With textarea"
+          id="pfint"></textarea>
       </div>
-
       <div class="input-group goals">
         <span class="input-group-text gray-box">목표</span>
-        <textarea class="form-control" aria-label="With textarea" id="pfgoals"></textarea>
+        <textarea
+          class="form-control"
+          aria-label="With textarea"
+          id="pfgoals"></textarea>
       </div>
-
       <div class="input-group dtn">
         <span class="input-group-text gray-box">각오</span>
-        <textarea class="form-control" aria-label="With textarea" id="pfdtr"></textarea>
+        <textarea
+          class="form-control"
+          aria-label="With textarea"
+          id="pfdtr"></textarea>
       </div>
-
       <div class="btnbtn">
         <button class="qwe" id="qwebtn">등록하기</button>
       </div>
-
-
-      <!-- 컨텐츠 쭉 쓰시면 됩니다 -->
     </div>
     <!-- //모달끝 -->
 
     <!-- 카드클릭모달 -->
     <div class="clickmodal">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalCenteredScrollableTitle">이름이 들어감</h1>
-        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">x</button> -->
+        <h1 class="modal-title fs-5" id="exampleModalCenteredScrollableTitle">
+          이름이 들어감
+        </h1>
       </div>
       <div class="bodymodal">
         <div class="modal1">
-          <div class="modalimg">
-          </div>
+          <div class="modalimg"></div>
           <div class="modaltxt">
             <h3>MBTI</h3>
             <p>mbti자리입니다</p>
@@ -262,7 +265,6 @@
           <h3>각오</h3>
           <p>각오자리입니다</p>
         </div>
-        <button class="deletebtn" id="deletebtn">삭제하기</button>
       </div>
     </div>
     <!-- 카드클릭모달끝 -->
@@ -271,27 +273,31 @@
       <p>SoD</p>
     </header>
     <div class="btndiv">
-      <button type="button" class="btn btn-outline-light" onclick="location.href = '../index.html' "> HOME</button>
-      <button type="button" class="btn btn-outline-light" onclick="location.href = './member.html' ">MEMBERS</button>
-      <button type="button" class="btn btn-outline-light" onclick="location.href = './newsreal.html'">NEWS</button>
+      <button
+        type="button"
+        class="btn btn-outline-light"
+        onclick="location.href = '../index.html'">
+        HOME
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-light"
+        onclick="location.href = './member.html'">
+        MEMBERS
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-light"
+        onclick="location.href = './newsreal.html'">
+        NEWS
+      </button>
     </div>
     <!-- 이름 카드 -->
     <div class="row row-cols-1 row-cols-md-4 g-4 cards">
-      <!-- 기본 골격 -->
-      <!-- <div class="col">
-      <div class="card h-100">
-        <img class="img_cards" id="imgid" src="" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title" id="nameid">이름</h5>
-        </div>
-      </div>
-    </div> -->
+      <!-- 카드가 여기에 추가됩니다 -->
     </div>
-
     <div class="savebutton">
       <button class="btn btn-outline-light modalss">멤버 추가하기</button>
     </div>
-    </div>
   </body>
-
 </html>
