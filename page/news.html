@@ -27,8 +27,25 @@
   </head>
 
   <script>
-    function news() {
-      return fetch("http://127.0.0.1:9999/news");
+    async function news() {
+      try {
+        const response = await fetch("http://127.0.0.1:9999/news");
+        const data = await response.json();
+        const newsDiv = document.getElementById("news-content");
+
+        let tempHtml = "";
+        data.items.forEach((item) => {
+          tempHtml += `<div class="news-list">
+        <a href="${item.link}">${item.title}</a>
+          <p>${item.description}</p>
+      </div>`;
+        });
+
+        newsDiv.innerHTML = tempHtml;
+      } catch (error) {
+        console.error("no", error);
+      }
+      // return fetch("http://127.0.0.1:9999/news");
     }
   </script>
 
@@ -47,6 +64,11 @@
       </button>
     </div>
 
-    <div class="news-content">뉴스가 표시될 영역</div>
+    <div class="news-content" id="news-content">
+      <div class="news-list">
+        <a href="">뉴스 제목이랑</a>
+        <p>내용을 불러오겟다</p>
+      </div>
+    </div>
   </body>
 </html>
