@@ -82,7 +82,7 @@
         };
 
         await addDoc(collection(db, "inputdata"), docData);
-        alert("성공했습니다.");
+        alert("업로드했어요.");
         window.location.reload();
       } catch (error) {
         console.error("에러", error);
@@ -122,13 +122,13 @@
     $(document).ready(function () {
       displayCards();
 
+      // 삭제버튼 누르면 삭제 기능
       $(".cards").on("click", ".btn-delete", async function () {
         const docId = $(this).data("id"); // 삭제할 문서 ID 가져오기
         try {
-          const docRef = doc(db, "inputdata", docId); // 문서 참조 생성
-          await deleteDoc(docRef); // 해당 문서 삭제
+          await deleteDoc(doc(db, "inputdata", docId)); // 해당 문서 삭제
           alert("삭제되었습니다.");
-          window.location.reload(); // 페이지 새로 고침
+          window.location.reload();
         } catch (error) {
           console.error("삭제 오류", error);
           alert("응안돼");
