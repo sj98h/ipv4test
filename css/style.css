@@ -249,13 +249,27 @@ header {
   margin-bottom: 100px;
 }
 
+.news-content li {
+  background-color: white;
+}
+
 .newstitle {
   font-size: 30px;
   cursor: pointer;
-  
 }
 .newstitle h3 {
   font-size: 50px;
   color: rgb(52, 161, 250);
   text-decoration: underline;
+}
+
+/* 카드 */
+.cardname {
+  text-align: center;
+  font-size: 50px;
+}
+
+.btn-delete {
+  display: block;
+  margin-left: auto;
 }
