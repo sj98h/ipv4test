@@ -8,8 +8,6 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
 </head>
-
-<body>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"></script>
@@ -17,7 +15,7 @@
 
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
-    import { getFirestore, collection, addDoc, getDocs, deleteDoc } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
+    import {updateDoc, deleteField, getFirestore, collection, addDoc, getDocs, deleteDoc } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
     import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js';
 
 
@@ -150,20 +148,23 @@
       });
 
       // 클릭 모달 삭제
+      // const inputdataid = "zzbI2jJka8sdor31RzhD"
       const deletebtn = document.querySelector("#deletebtn");
       deletebtn.addEventListener("click", async function () {
-
-        const pfimg = $(".card").data('pfimg');
-        const pfname = $(".card").data('pfname');
-        const pfhobby = $(".card").data('pfhobby');
-        const pfgoals = $(".card").data('pfgoals');
-        const pfdtr = $(".card").data('pfdtr');
-        const pfmbti = $(".card").data('pfmbti');
-        const pfblog = $(".card").data('pfblog');
-        const pfint = $(".card").data('pfint');
+        
+        // const pfimg = $(".card").data('pfimg');
+        // const pfname = $(".card").data('pfname');
+        // const pfhobby = $(".card").data('pfhobby');
+        // const pfgoals = $(".card").data('pfgoals');
+        // const pfdtr = $(".card").data('pfdtr');
+        // const pfmbti = $(".card").data('pfmbti');
+        // const pfblog = $(".card").data('pfblog');
+        // const pfint = $(".card").data('pfint');
 
         await deleteDoc(collection(db, "inputdata"));
       });
+
+  
 
       // 모달 닫기
       // console.log($('.btn-close'))
