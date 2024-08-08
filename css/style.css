@@ -187,9 +187,16 @@ header {
 .modaltxt {
   width: 50%;
   height: 400px;
-
+  padding: 10px;
   text-align: center;
   font-size: 30px;
+}
+
+.modaltxt a {
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .modal1 {
@@ -228,7 +235,8 @@ header {
 .bodymodal {
   height: 88%;
   padding: 20px;
-  overflow: scroll;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 .modalimg img {
@@ -243,8 +251,8 @@ header {
 /* 뉴스 */
 .news-content {
   background-color: black;
-  width:  1500px;
-  min-height: 700px ;
+  width: 1500px;
+  min-height: 700px;
   margin: auto;
   margin-bottom: 100px;
 }
